@@ -32,14 +32,14 @@ node('php'){
     }
 
     stage('Docker Build') {
-        sh 'docker build -t samuelbartag/laravel:$BUILD_NUMBER .'
+        sh 'sudo docker build -t samuelbartag/laravel:$BRANCH_NAME-$BUILD_NUMBER .'
     }
 
     stage('Docker Ship') {
-        sh 'docker push samuelbartag/laravel:$BUILD_NUMBER'
+        sh 'sudo docker push samuelbartag/laravel:$BRANCH_NAME-$BUILD_NUMBER'
     }
     
     stage('Docker Cleanup') {
-        sh 'docker rmi -f samuelbartag/laravel:$BUILD_NUMBER'
+        sh 'sudo docker rmi -f samuelbartag/laravel:$BRANCH_NAME-$BUILD_NUMBER'
     }
 }
